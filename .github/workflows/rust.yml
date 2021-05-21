@@ -1,0 +1,85 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-amd64-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        target: x86_64-unknown-linux-gnu
+        override: true
+    - name: rust-cargo
+      uses: actions-rs/cargo@v1.0.1
+      with:
+       command: build
+       args: --release --target x86_64-unknown-linux-gnu
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: prebuilt-amd64-linux
+       path: target/release/*
+  build-amd64-win32:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        target: x86_64-unknown-linux-gnu
+        override: true
+    - name: rust-cargo
+      uses: actions-rs/cargo@v1.0.1
+      with:
+       command: build
+       args: --release --target x86_64-unknown-linux-gnu
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: prebuilt-amd64-win32
+       path: target/release/*
+  build-armv7:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        target: x86_64-unknown-linux-gnu
+        override: true
+    - name: rust-cargo
+      uses: actions-rs/cargo@v1.0.1
+      with:
+       command: build
+       args: --release --target x86_64-unknown-linux-gnu
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: prebuilt-armv7
+       path: target/release/*
+  build-aarch64:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        target: x86_64-unknown-linux-gnu
+        override: true
+    - name: rust-cargo
+      uses: actions-rs/cargo@v1.0.1
+      with:
+       command: build
+       args: --release --target x86_64-unknown-linux-gnu
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: prebuilt-aarch64
+       path: target/release/*
